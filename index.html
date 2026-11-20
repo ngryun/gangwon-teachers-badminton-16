@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b7a5c">
+<title>강원 교직원배드민턴대회 경기일정</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏸%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f4f6f5;--card:#fff;--ink:#14211d;--sub:#5c6a66;--line:#dfe5e2;--accent:#0b7a5c;--on-accent:#fff;--accent-soft:#e1f3ec;--ko:#b45309;--ko-soft:#fdf1e3;--chip:#ecf0ee;--past:#a2acA8;--star:#d97706;--shadow:0 1px 2px rgba(20,33,29,.06)}
+@media (prefers-color-scheme: dark){:root{--bg:#0f1513;--card:#182220;--ink:#e7eeeb;--sub:#9aa9a4;--line:#2a3733;--accent:#3ecf9f;--on-accent:#06261c;--accent-soft:#15392e;--ko:#f0a35a;--ko-soft:#3a2a17;--chip:#222e2b;--past:#5d6b67;--star:#f59e0b;--shadow:none;color-scheme:dark}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;font-size:15px;line-height:1.45;word-break:keep-all}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:760px;margin:0 auto;padding:16px max(14px,env(safe-area-inset-right,0px)) 72px max(14px,env(safe-area-inset-left,0px))}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+header h1{font-size:20px;line-height:1.3;margin:0}
+header h1 small{display:block;font-size:13px;font-weight:600;color:var(--accent)}
+.meet{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;margin:6px 0 0;font-size:13px;color:var(--sub)}
+.dday{background:var(--accent);color:var(--on-accent);border-radius:6px;padding:1px 8px;font-weight:700}
+
+.search{position:relative;margin-top:14px}
+.search input{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:12px 40px 12px 40px;outline:none;-webkit-appearance:none;appearance:none}
+.search input:focus{border-color:var(--accent)}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+.search .ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--sub);pointer-events:none}
+.search .clr{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;background:none;color:var(--sub);font-size:18px;display:none}
+.search.has .clr{display:block}
+.sug{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-top:6px;overflow:hidden;box-shadow:var(--shadow)}
+.sug:empty{display:none}
+.sug button{display:flex;align-items:baseline;gap:8px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:11px 14px;min-height:44px}
+.sug button:last-child{border-bottom:0}
+.sug button:active{background:var(--accent-soft)}
+.sug .tg{flex:none;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:5px;padding:1px 6px}
+.sug b{font-weight:700}
+.sug span.d{color:var(--sub);font-size:13px;margin-left:auto;text-align:right}
+.sug .none{padding:12px 14px;color:var(--sub);font-size:14px}
+
+.favs{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:10px;font-size:13px}
+.favs:empty{display:none}
+.favs .lb{color:var(--star);font-weight:700}
+
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--chip);border-radius:12px;padding:4px;margin-top:14px}
+.tabs button{border:0;background:none;border-radius:9px;padding:10px 4px;font-weight:700;color:var(--sub);min-height:44px}
+.tabs button[aria-selected="true"]{background:var(--card);color:var(--accent);box-shadow:var(--shadow)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:8px}
+.panel h2{font-size:12px;font-weight:700;color:var(--sub);margin:12px 0 6px}
+.panel h2:first-child{margin-top:0}
+.hint{color:var(--sub);font-size:13px;margin:0}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:6px}
+.grid .chip{white-space:nowrap;padding-inline:6px}
+.chip{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:38px;padding:6px 11px;border:1px solid var(--line);border-radius:10px;background:var(--card);font-size:14px;line-height:1.2;text-align:center}
+.chip small{color:var(--sub);font-size:11px;font-weight:500}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:700}
+.chip[aria-pressed="true"] small{color:inherit;opacity:.85}
+.chip.q{border-style:dashed}
+.evrow{display:grid;grid-template-columns:98px 1fr;gap:8px;align-items:start;margin-top:6px}
+.evrow>span{font-size:13px;font-weight:600;padding-top:9px}
+.cho{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cho .chip{padding:6px 0;min-width:0}
+.names{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px;max-height:46vh;overflow:auto;overscroll-behavior:contain;padding-right:2px}
+.names button{display:flex;flex-direction:column;align-items:flex-start;text-align:left;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:7px 10px;min-height:44px}
+.names button b{font-size:15px}
+.names button span{font-size:12px;color:var(--sub)}
+
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);margin:14px -14px 0;padding:8px 14px;padding-top:max(8px,env(safe-area-inset-top,0px));border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.bar .act{display:flex;gap:6px;flex-wrap:wrap;flex:1;min-width:0}
+.tag{display:inline-flex;align-items:center;gap:4px;background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:5px 6px 5px 12px;font-size:13px;font-weight:700;min-height:32px}
+.tag i{font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.22);font-size:12px}
+.bar .all{color:var(--sub);font-size:13px;font-weight:600;padding:5px 0}
+.seg{display:flex;background:var(--chip);border-radius:9px;padding:3px;flex:none}
+.seg button{border:0;background:none;border-radius:7px;padding:5px 10px;font-size:13px;font-weight:600;color:var(--sub);min-height:32px}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+
+.sum{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:12px}
+.sum:empty{display:none}
+.sum .top{display:flex;align-items:flex-start;gap:8px}
+.sum h2{font-size:19px;margin:0;flex:1;line-height:1.3}
+.sum h2 small{font-size:13px;font-weight:500;color:var(--sub);margin-left:4px}
+.sum .ib{flex:none;border:1px solid var(--line);background:var(--card);border-radius:9px;min-width:40px;height:36px;padding:0 9px;font-size:13px;color:var(--sub)}
+.sum .ib.on{color:var(--star);border-color:var(--star);font-weight:700}
+.sum p{margin:6px 0 0;color:var(--sub);font-size:13px}
+.sum p b{color:var(--ink)}
+.ent{border-top:1px solid var(--line);margin-top:12px;padding-top:12px}
+.ent .ttl{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-weight:700}
+.badge{display:inline-block;font-size:11px;font-weight:700;border-radius:5px;padding:1px 6px;background:var(--accent-soft);color:var(--accent)}
+.badge.ko{background:var(--ko-soft);color:var(--ko)}
+.lnk{background:none;border:0;padding:0;color:inherit;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.path{margin-top:10px;border:1px dashed var(--line);border-radius:10px;padding:8px 10px}
+.path h3{font-size:12px;margin:0 0 4px;color:var(--ko)}
+.path ol{list-style:none;margin:0;padding:0;font-size:13px}
+.path li{display:grid;grid-template-columns:36px 1fr;gap:0 8px;padding:4px 0;align-items:baseline}
+.path li+li{border-top:1px dashed var(--line)}
+.path li b{color:var(--ko)}
+.path li em{font-style:normal;font-weight:600;font-variant-numeric:tabular-nums}
+.path li span{grid-column:2;color:var(--sub)}
+details.grp{margin-top:10px;font-size:13px}
+details.grp summary{cursor:pointer;color:var(--accent);font-weight:600;padding:4px 0}
+.grp dl{margin:4px 0 0;display:grid;gap:8px}
+.grp dt{font-weight:700;font-size:12px;color:var(--sub)}
+.grp dd{margin:2px 0 0;display:flex;flex-wrap:wrap;gap:4px 12px}
+
+.cnt{color:var(--sub);font-size:13px;margin:14px 2px 0}
+.day{font-size:14px;margin:18px 2px 8px;display:flex;gap:8px;align-items:baseline}
+.day small{color:var(--sub);font-weight:400}
+.list{display:grid;gap:8px}
+.m{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:10px 12px;display:grid;grid-template-columns:62px 1fr;gap:10px;box-shadow:var(--shadow)}
+.m.ko{border-left-color:var(--ko)}
+.m.past{border-left-color:var(--past)}
+.m.past .when,.m.past .side{opacity:.55}
+.m.next{outline:2px solid var(--accent);outline-offset:-1px}
+.when{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.when b{font-size:19px;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.when .ct{font-size:12px;font-weight:700;background:var(--chip);border-radius:6px;padding:2px 6px}
+.when .no{font-size:11px;color:var(--sub)}
+.body{min-width:0}
+.ev{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;font-size:12px;color:var(--sub);margin-bottom:5px}
+.ev .lnk{font-weight:600}
+.side{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;padding:5px 8px;border-radius:8px}
+.side+.side{margin-top:3px;border-top:1px dashed var(--line);border-top-left-radius:0;border-top-right-radius:0}
+.side .tm{font-weight:700;font-size:15px}
+.side .rg{font-size:11px;color:var(--sub)}
+.side .pl{font-size:14px;color:var(--sub);margin-left:auto;text-align:right}
+.side.me{background:var(--accent-soft)}
+.side.me+.side,.side+.side.me{border-top-color:transparent}
+.side.me .tm{color:var(--accent)}
+.side .pl .me{color:var(--ink);font-weight:700}
+.side.seed .tm{font-weight:600;font-size:14px}
+.more{display:block;width:100%;margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-weight:700;color:var(--accent);min-height:46px}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:22px 14px;text-align:center;color:var(--sub);margin-top:12px}
+footer{margin-top:28px;color:var(--sub);font-size:12px;line-height:1.6}
+footer p{margin:4px 0}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);border-radius:999px;padding:9px 16px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:.95}
+@media (min-width:600px){
+  .m{grid-template-columns:78px 1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1><small>제16회 강원특별자치도</small>교직원배드민턴대회 경기일정</h1>
+    <p class="meet"><span class="dday" id="dday"></span><span>📍 삼척시다목적체육관</span><span>11.21(토) 예선 · 11.22(일) 본선</span></p>
+  </header>
+
+  <div class="search" id="searchBox">
+    <span class="ico" aria-hidden="true">🔍</span>
+    <label class="vh" for="q">이름, 학교, 종목 검색</label>
+    <input id="q" type="search" inputmode="search" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="이름 · 학교 · 종목 검색">
+    <button class="clr" id="qClear" type="button" aria-label="검색어 지우기">✕</button>
+  </div>
+  <div class="sug" id="sug"></div>
+  <div class="favs" id="favs"></div>
+
+  <div class="tabs" role="tablist" aria-label="조회 기준">
+    <button role="tab" id="tab-r" data-tab="r" aria-controls="panel">지역별</button>
+    <button role="tab" id="tab-p" data-tab="p" aria-controls="panel">교사별</button>
+    <button role="tab" id="tab-e" data-tab="e" aria-controls="panel">종목별</button>
+  </div>
+  <div class="panel" id="panel" role="tabpanel"></div>
+
+  <div class="bar" id="bar">
+    <div class="act" id="act"></div>
+    <div class="seg" role="group" aria-label="날짜">
+      <button type="button" data-day="">전체</button>
+      <button type="button" data-day="11-21">21 토</button>
+      <button type="button" data-day="11-22">22 일</button>
+    </div>
+  </div>
+
+  <section class="sum" id="sum" aria-live="polite"></section>
+  <p class="cnt" id="cnt"></p>
+  <div id="res"></div>
+
+  <footer>
+    <p id="note"></p>
+    <p>대회 운영본부가 배포한 「경기 대진표 및 경기 시간」 자료를 옮긴 것입니다. 현장 사정으로 시간·코트가 바뀔 수 있으니 본부 안내를 함께 확인하세요.</p>
+    <p>지역은 소속 학교·기관의 소재 시·군 기준이며, 원자료에 없는 정보라 따로 붙였습니다.</p>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+'use strict';
+var D = window.DATA, YEAR = 2026;
+var TEAMS = D.teams, EVENTS = D.events, MATCHES = D.matches;
+var REGION_ORDER = ['춘천','원주','강릉','동해','태백','속초','삼척','홍천','횡성','영월','평창','정선','철원','화천','양구','인제','고성','양양'];
+var UNKNOWN = '확인 필요';
+var DOW = ['일','월','화','수','목','금','토'];
+var $ = function(id){ return document.getElementById(id); };
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+/* ---------- 자료 엮기: 출전 조(복식 한 팀) · 사람 · 소속 ---------- */
+var ENTRIES = [], entryIdx = {}, PEOPLE = {}, PEOPLE_LIST = [];
+TEAMS.forEach(function(t, i){ t.i = i; t.entries = []; t.region = t.r || UNKNOWN; });
+MATCHES.forEach(function(m, i){
+  m.i = i;
+  var p = m.d.split('-'), h = m.t.split(':');
+  m.ms = Date.UTC(YEAR, p[0] - 1, +p[1], h[0] - 9, +h[1]);
+  if (m.k) return;
+  ['a','b'].forEach(function(s){
+    var pl = m[s + 'p'], key = m.e + '|' + (m.g || '') + '|' + m[s] + '|' + pl.slice().sort().join(',');
+    var x = entryIdx[key];
+    if (x === undefined) {
+      x = entryIdx[key] = ENTRIES.length;
+      ENTRIES.push({ i: x, e: m.e, g: m.g || '', team: m[s], players: pl.slice(), matches: [] });
+      TEAMS[m[s]].entries.push(x);
+      pl.forEach(function(name){
+        var pk = name + '@' + TEAMS[m[s]].n;
+        if (!PEOPLE[pk]) { PEOPLE[pk] = { key: pk, name: name, team: m[s], entries: [] }; PEOPLE_LIST.push(PEOPLE[pk]); }
+        PEOPLE[pk].entries.push(x);
+      });
+    }
+    ENTRIES[x].matches.push(m);
+    m['e' + s] = x;
+  });
+});
+PEOPLE_LIST.sort(function(a, b){ return a.name.localeCompare(b.name, 'ko') || TEAMS[a.team].n.localeCompare(TEAMS[b.team].n, 'ko'); });
+var TEAM_BY_NAME = {}; TEAMS.forEach(function(t){ TEAM_BY_NAME[t.n] = t; });
+var REGIONS = REGION_ORDER.concat([UNKNOWN]).map(function(r){
+  return { name: r, teams: TEAMS.filter(function(t){ return t.region === r; }) };
+}).filter(function(r){ return r.teams.length; });
+var EVENT_GROUPS = {}; // 종목 → 조 목록, 본선 유무
+EVENTS.forEach(function(_, e){ EVENT_GROUPS[e] = { groups: [], ko: false, entries: [] }; });
+ENTRIES.forEach(function(en){ var eg = EVENT_GROUPS[en.e]; eg.entries.push(en); if (en.g && eg.groups.indexOf(en.g) < 0) eg.groups.push(en.g); });
+MATCHES.forEach(function(m){ if (m.k) EVENT_GROUPS[m.e].ko = true; });
+EVENTS.forEach(function(_, e){ EVENT_GROUPS[e].groups.sort(); });
+
+function cho(name){
+  var c = name.charCodeAt(0) - 0xAC00;
+  if (c < 0 || c > 11171) return '기타';
+  return 'ㄱㄱㄴㄷㄷㄹㅁㅂㅂㅅㅅㅇㅈㅈㅊㅋㅌㅍㅎ'.charAt(Math.floor(c / 588));
+}
+var CHO = 'ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ'.split('');
+function eventParts(name){
+  var m = name.match(/^(남복|여복)\s+(.+)\s+(\S+)$/);
+  if (m) return { row: m[1] + ' ' + m[2], cls: m[3] };
+  m = name.match(/^(\S+)\s+(\S+)$/);
+  return m ? { row: m[1], cls: m[2] } : { row: name, cls: name };
+}
+function groupLabel(g){ return g ? g + '조' : '풀리그'; }
+function dayLabel(d){ var p = d.split('-'); return +p[0] + '월 ' + +p[1] + '일 (' + DOW[new Date(Date.UTC(YEAR, p[0] - 1, +p[1])).getUTCDay()] + ')'; }
+function shortDay(d){ return +d.split('-')[1] + '일'; }
+function seedLabel(seeds){
+  if (seeds.length === 1) return seeds[0].charAt(0) + '조 ' + seeds[0].slice(1) + '위';
+  if (seeds.length <= 4) return seeds.join('·') + ' 승자';
+  return seeds[0] + '~' + seeds[seeds.length - 1] + ' 구역 승자';
+}
+
+/* ---------- 상태 ↔ 주소(#) ---------- */
+var state = { tab: 'r', r: null, s: null, p: null, e: null, g: null, d: '', cho: null };
+var limit = 60, STEP = 60;
+function readHash(){
+  var q = new URLSearchParams(location.hash.replace(/^#/, ''));
+  var s = { tab: state.tab, r: null, s: null, p: null, e: null, g: null, d: '', cho: state.cho };
+  if (q.get('p') && PEOPLE[q.get('p')]) s.p = q.get('p');
+  if (q.get('s') && TEAM_BY_NAME[q.get('s')]) s.s = TEAM_BY_NAME[q.get('s')].i;
+  if (q.get('r') && REGIONS.some(function(r){ return r.name === q.get('r'); })) s.r = q.get('r');
+  var e = EVENTS.indexOf(q.get('e') || '');
+  if (e >= 0) { s.e = e; var g = q.get('g'); if (g && (g === '본선' ? EVENT_GROUPS[e].ko : EVENT_GROUPS[e].groups.indexOf(g) >= 0)) s.g = g; }
+  if (q.get('d') === '21' || q.get('d') === '22') s.d = '11-' + q.get('d');
+  if (['r','p','e'].indexOf(q.get('tab')) >= 0) s.tab = q.get('tab');
+  else if (s.p) s.tab = 'p'; else if (s.e !== null && s.r === null && s.s === null) s.tab = 'e'; else if (s.r !== null || s.s !== null) s.tab = 'r';
+  state = s;
+}
+function writeHash(){
+  var q = new URLSearchParams();
+  if (state.r !== null) q.set('r', state.r);
+  if (state.s !== null) q.set('s', TEAMS[state.s].n);
+  if (state.p) q.set('p', state.p);
+  if (state.e !== null) q.set('e', EVENTS[state.e]);
+  if (state.g) q.set('g', state.g);
+  if (state.d) q.set('d', state.d.slice(3));
+  var h = q.toString();
+  var url = location.pathname + location.search + (h ? '#' + h : '');
+  if ((location.hash.replace(/^#/, '')) !== h) history.pushState(null, '', url);
+}
+function update(patch, opt){
+  for (var k in patch) state[k] = patch[k];
+  limit = STEP;
+  writeHash(); render();
+  if (opt && opt.scroll) {
+    var y = $('bar').getBoundingClientRect().top + window.pageYOffset - 2;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}
+var pick = {
+  region: function(r){ update({ tab: 'r', r: state.r === r && state.s === null ? null : r, s: null, p: null }); },
+  team: function(i){ update({ tab: 'r', r: TEAMS[i].region, s: state.s === i ? null : i, p: null, e: null, g: null }, { scroll: state.s !== i }); },
+  person: function(pk){ update({ tab: 'p', p: pk, r: null, s: null, e: null, g: null, cho: cho(PEOPLE[pk].name) }, { scroll: true }); },
+  event: function(e, g){ update({ e: state.e === e && !g ? null : e, g: g || null, p: null }, { scroll: !(state.e === e && !g) }); }
+};
+
+/* ---------- 즐겨찾기(이 기기에만 저장) ---------- */
+var FAV_KEY = 'gw-badminton-16:fav';
+function favs(){ try { var v = JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } }
+function favId(){ return state.p ? 'p:' + state.p : state.s !== null ? 's:' + TEAMS[state.s].n : null; }
+function toggleFav(){
+  var id = favId(); if (!id) return;
+  var f = favs(), i = f.indexOf(id);
+  if (i >= 0) f.splice(i, 1); else f.unshift(id);
+  try { localStorage.setItem(FAV_KEY, JSON.stringify(f.slice(0, 12))); toast(i >= 0 ? '즐겨찾기에서 뺐습니다' : '즐겨찾기에 넣었습니다'); }
+  catch (e) { toast('이 브라우저에서는 저장할 수 없습니다'); }
+  render();
+}
+var toastTimer;
+function toast(msg){ var t = $('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastTimer); toastTimer = setTimeout(function(){ t.classList.remove('on'); }, 1800); }
+
+/* ---------- 경기 고르기 ---------- */
+function selectMatches(){
+  var person = state.p ? PEOPLE[state.p] : null, out = [];
+  for (var i = 0; i < MATCHES.length; i++) {
+    var m = MATCHES[i];
+    if (state.d && m.d !== state.d) continue;
+    if (state.e !== null && m.e !== state.e) continue;
+    if (!m.k) {
+      if (state.g && m.g !== state.g) continue;
+      if (person) { if (person.entries.indexOf(m.ea) < 0 && person.entries.indexOf(m.eb) < 0) continue; }
+      else if (state.s !== null) { if (m.a !== state.s && m.b !== state.s) continue; }
+      else if (state.r !== null) { if (TEAMS[m.a].region !== state.r && TEAMS[m.b].region !== state.r) continue; }
+    } else {
+      if (person || state.s !== null || state.r !== null) continue;   // 본선은 누가 올라갈지 모르므로 종목 보기에서만
+      if (state.g && state.g !== '본선' && !m.as.concat(m.bs).some(function(s){ return s.charAt(0) === state.g; })) continue;
+    }
+    out.push(m);
+  }
+  return out;
+}
+function isMine(m, side){
+  if (m.k) return false;
+  if (state.p) return PEOPLE[state.p].entries.indexOf(m['e' + side]) >= 0;
+  if (state.s !== null) return m[side] === state.s;
+  if (state.r !== null) return TEAMS[m[side]].region === state.r;
+  return false;
+}
+
+/* ---------- 그리기 ---------- */
+function chip(label, pressed, attrs, small, cls){
+  return '<button type="button" class="chip' + (cls ? ' ' + cls : '') + '" aria-pressed="' + (pressed ? 'true' : 'false') + '" ' + attrs + '>' + esc(label) + (small ? ' <small>' + esc(small) + '</small>' : '') + '</button>';
+}
+function renderPanel(){
+  ['r','p','e'].forEach(function(t){ $('tab-' + t).setAttribute('aria-selected', state.tab === t ? 'true' : 'false'); });
+  var h = '';
+  if (state.tab === 'r') {
+    h += '<h2>시·군</h2><div class="grid">' + REGIONS.map(function(r){
+      return chip(r.name, state.r === r.name, 'data-region="' + esc(r.name) + '"', r.teams.length + '곳', r.name === UNKNOWN ? 'q' : '');
+    }).join('') + '</div>';
+    if (state.r !== null) {
+      var reg = REGIONS.filter(function(r){ return r.name === state.r; })[0];
+      h += '<h2>' + esc(state.r) + ' 소속 ' + reg.teams.length + '곳 — 누르면 그 소속만 봅니다</h2><div class="chips">' + reg.teams.map(function(t){
+        return chip(t.n, state.s === t.i, 'data-team="' + t.i + '"', t.entries.length + '팀');
+      }).join('') + '</div>';
+      if (state.r === UNKNOWN) h += '<p class="hint" style="margin-top:8px">강원도 안에 같은 이름의 학교가 여럿이거나 소재지를 확인하지 못한 소속입니다.</p>';
+    } else h += '<p class="hint" style="margin-top:10px">시·군을 고르면 그 지역 소속 팀의 경기를 시간순으로 보여 줍니다.</p>';
+  } else if (state.tab === 'p') {
+    h += '<h2>이름 첫 글자</h2><div class="cho">' + CHO.map(function(c){ return chip(c, state.cho === c, 'data-cho="' + c + '"'); }).join('') + '</div>';
+    if (state.cho) {
+      var list = PEOPLE_LIST.filter(function(p){ return cho(p.name) === state.cho; });
+      h += '<div class="names">' + list.map(function(p){
+        return '<button type="button" data-person="' + esc(p.key) + '"' + (state.p === p.key ? ' style="border-color:var(--accent);background:var(--accent-soft)"' : '') + '><b>' + esc(p.name) + '</b><span>' + esc(TEAMS[p.team].n) + ' · ' + esc(p.entries.map(function(x){ return EVENTS[ENTRIES[x].e]; }).join(', ')) + '</span></button>';
+      }).join('') + '</div>';
+    } else h += '<p class="hint" style="margin-top:10px">첫 글자를 고르거나, 위 검색창에 이름을 입력하세요. (출전 ' + PEOPLE_LIST.length + '명)</p>';
+  } else {
+    var rows = [], seen = {};
+    EVENTS.forEach(function(name, e){ var p = eventParts(name); if (!seen[p.row]) { seen[p.row] = { row: p.row, items: [] }; rows.push(seen[p.row]); } seen[p.row].items.push({ e: e, cls: p.cls }); });
+    h += rows.map(function(r){
+      return '<div class="evrow"><span>' + esc(r.row) + '</span><div class="chips">' + r.items.map(function(it){ return chip(it.cls, state.e === it.e, 'data-event="' + it.e + '"'); }).join('') + '</div></div>';
+    }).join('');
+    if (state.r !== null && state.e === null) h += '<p class="hint" style="margin-top:10px">지금 고른 지역·소속 안에서 종목을 좁혀 봅니다.</p>';
+  }
+  $('panel').innerHTML = h;
+  $('panel').setAttribute('aria-labelledby', 'tab-' + state.tab);
+}
+function renderBar(){
+  var t = [];
+  function tag(label, clear){ t.push('<button type="button" class="tag" data-clear="' + clear + '" aria-label="' + esc(label) + ' 조건 지우기">' + esc(label) + '<i aria-hidden="true">✕</i></button>'); }
+  if (state.p) tag(PEOPLE[state.p].name + ' · ' + TEAMS[PEOPLE[state.p].team].n, 'p');
+  if (state.r !== null && state.s === null) tag(state.r, 'r');
+  if (state.s !== null) tag(TEAMS[state.s].n, 's');
+  if (state.e !== null) tag(EVENTS[state.e] + (state.g ? ' · ' + (state.g === '본선' ? '본선' : state.g + '조') : ''), 'e');
+  $('act').innerHTML = t.length ? t.join('') : '<span class="all">전체 경기</span>';
+  Array.prototype.forEach.call(document.querySelectorAll('.seg button'), function(b){ b.setAttribute('aria-pressed', b.dataset.day === state.d ? 'true' : 'false'); });
+}
+function entryLine(en, withEvent){
+  return (withEvent ? '<button type="button" class="lnk" data-event="' + en.e + '" data-g="' + esc(en.g) + '">' + esc(EVENTS[en.e]) + '</button> ' : '') +
+    '<span class="badge">' + esc(groupLabel(en.g)) + '</span>';
+}
+function pathBlock(en){
+  if (!en.g) return '';
+  var h = '';
+  ['1','2'].forEach(function(rank){
+    var seed = en.g + rank;
+    var ms = MATCHES.filter(function(m){ return m.k && m.e === en.e && (m.as.indexOf(seed) >= 0 || m.bs.indexOf(seed) >= 0); });
+    if (!ms.length) return;
+    h += '<div class="path"><h3>본선 · ' + esc(en.g) + '조 ' + rank + '위로 올라가면 (이길 때마다 다음 줄)</h3><ol>' + ms.map(function(m){
+      var opp = m.as.indexOf(seed) >= 0 ? m.bs : m.as;
+      return '<li><b>' + esc(m.r) + '</b><em>' + shortDay(m.d) + ' ' + m.t + ' · ' + m.c + '코트</em><span>상대 ' + esc(seedLabel(opp)) + '</span></li>';
+    }).join('') + '</ol></div>';
+  });
+  return h;
+}
+function mates(en){
+  return EVENT_GROUPS[en.e].entries.filter(function(x){ return x.g === en.g && x !== en; });
+}
+function pairHtml(en){
+  return '<button type="button" class="lnk" data-team="' + en.team + '"><b>' + esc(TEAMS[en.team].n) + '</b></button> ' + en.players.map(function(n){
+    return '<button type="button" class="lnk" data-person="' + esc(n + '@' + TEAMS[en.team].n) + '">' + esc(n) + '</button>';
+  }).join('·');
+}
+function regionText(t){
+  if (t.r) return t.r;
+  return t.cand && t.cand.length ? '지역 확인 필요(' + t.cand.join('·') + ' 중)' : '지역 확인 필요';
+}
+function renderSummary(list){
+  var h = '', id = favId(), isFav = id && favs().indexOf(id) >= 0;
+  var tools = (id ? '<button type="button" class="ib' + (isFav ? ' on' : '') + '" data-act="fav" aria-pressed="' + (isFav ? 'true' : 'false') + '">' + (isFav ? '★ 저장됨' : '☆ 저장') + '</button>' : '') +
+    '<button type="button" class="ib" data-act="share">링크 복사</button>';
+  if (state.p) {
+    var p = PEOPLE[state.p], t = TEAMS[p.team];
+    h += '<div class="top"><h2>' + esc(p.name) + '<small>' + esc(t.n) + ' · ' + esc(regionText(t)) + '</small></h2>' + tools + '</div>';
+    p.entries.forEach(function(x){
+      var en = ENTRIES[x], partner = en.players.filter(function(n){ return n !== p.name; });
+      var first = en.matches.slice().sort(function(a, b){ return a.ms - b.ms; })[0];
+      h += '<div class="ent"><div class="ttl">' + entryLine(en, true) + '</div>' +
+        '<p>파트너 <b>' + partner.map(function(n){ return '<button type="button" class="lnk" data-person="' + esc(n + '@' + t.n) + '">' + esc(n) + '</button>'; }).join(', ') + '</b> · 예선 <b>' + en.matches.length + '경기</b> · 첫 경기 <b>' + shortDay(first.d) + ' ' + first.t + ' ' + first.c + '코트</b></p>' +
+        '<p>같은 조: ' + mates(en).map(pairHtml).join(' / ') + '</p>' + pathBlock(en) + '</div>';
+    });
+  } else if (state.s !== null) {
+    var tm = TEAMS[state.s];
+    h += '<div class="top"><h2>' + esc(tm.n) + '<small>' + esc(regionText(tm)) + ' · 출전 ' + tm.entries.length + '팀</small></h2>' + tools + '</div>';
+    h += '<div class="ent" style="display:grid;gap:8px">' + tm.entries.map(function(x){
+      var en = ENTRIES[x];
+      return '<div><div class="ttl" style="font-weight:500;font-size:13px">' + entryLine(en, true) + '</div><div style="font-size:15px;margin-top:2px">' + en.players.map(function(n){
+        return '<button type="button" class="lnk" data-person="' + esc(n + '@' + tm.n) + '"><b>' + esc(n) + '</b></button>';
+      }).join(' · ') + '</div></div>';
+    }).join('') + '</div>';
+  } else if (state.e !== null) {
+    var eg = EVENT_GROUPS[state.e], n21 = 0, nko = 0;
+    MATCHES.forEach(function(m){ if (m.e === state.e) { if (m.k) nko++; else n21++; } });
+    h += '<div class="top"><h2>' + esc(EVENTS[state.e]) + '<small>' + eg.entries.length + '팀' + (eg.groups.length ? ' · ' + eg.groups.length + '개 조' : ' · 풀리그') + '</small></h2>' + tools + '</div>';
+    h += '<p>예선 <b>' + n21 + '경기</b>' + (nko ? ' · 본선 <b>' + nko + '경기</b>' : ' · 본선 대진 없음') + '</p>';
+    if (eg.groups.length > 1 || eg.ko) {
+      h += '<div class="chips" style="margin-top:10px">' + chip('전체', !state.g, 'data-event="' + state.e + '" data-g=""') +
+        eg.groups.map(function(g){ return chip(g + '조', state.g === g, 'data-event="' + state.e + '" data-g="' + g + '"'); }).join('') +
+        (eg.ko ? chip('본선', state.g === '본선', 'data-event="' + state.e + '" data-g="본선"') : '') + '</div>';
+    }
+    var gs = (state.g && state.g !== '본선') ? [state.g] : (eg.groups.length ? eg.groups : ['']);
+    h += '<details class="grp"' + (state.g && state.g !== '본선' ? ' open' : '') + '><summary>참가 팀 보기</summary><dl>' + gs.map(function(g){
+      return '<div><dt>' + esc(groupLabel(g)) + '</dt><dd>' + eg.entries.filter(function(en){ return en.g === g; }).map(function(en){ return '<span>' + pairHtml(en) + '</span>'; }).join('') + '</dd></div>';
+    }).join('') + '</dl></details>';
+  } else if (state.r !== null) {
+    var reg = REGIONS.filter(function(r){ return r.name === state.r; })[0];
+    var ne = reg.teams.reduce(function(n, t){ return n + t.entries.length; }, 0);
+    h += '<div class="top"><h2>' + esc(state.r) + '<small>소속 ' + reg.teams.length + '곳 · 출전 ' + ne + '팀</small></h2><button type="button" class="ib" data-act="share">링크 복사</button></div>';
+  }
+  $('sum').innerHTML = h;
+}
+function sideHtml(m, s){
+  if (m.k) return '<div class="side seed"><span class="tm">' + esc(seedLabel(m[s + 's'])) + '</span></div>';
+  var t = TEAMS[m[s]], mine = isMine(m, s), me = state.p ? PEOPLE[state.p].name : null;
+  return '<div class="side' + (mine ? ' me' : '') + '"><button type="button" class="lnk tm" data-team="' + t.i + '">' + esc(t.n) + '</button><span class="rg">' + esc(t.r || '') + '</span>' +
+    '<span class="pl">' + m[s + 'p'].map(function(n){
+      return '<button type="button" class="lnk' + (mine && me === n ? ' me' : '') + '" data-person="' + esc(n + '@' + t.n) + '">' + esc(n) + '</button>';
+    }).join(' · ') + '</span></div>';
+}
+function renderList(list){
+  var now = Date.now(), h = '', day = null, shown = list.slice(0, limit);
+  var focused = state.p || state.s !== null, nextId = -1;
+  if (focused) for (var i = 0; i < list.length; i++) if (list[i].ms + 20 * 60000 > now) { if (now > list[0].ms - 36 * 3600000) nextId = list[i].i; break; }
+  shown.forEach(function(m){
+    if (m.d !== day) {
+      if (day !== null) h += '</div>';
+      day = m.d;
+      h += '<h3 class="day">' + dayLabel(m.d) + ' <small>' + list.filter(function(x){ return x.d === m.d; }).length + '경기</small></h3><div class="list">';
+    }
+    var past = m.ms + 20 * 60000 < now;
+    h += '<article class="m' + (m.k ? ' ko' : '') + (past ? ' past' : '') + (m.i === nextId ? ' next' : '') + '">' +
+      '<div class="when"><b>' + m.t + '</b><span class="ct">' + m.c + '코트</span><span class="no">' + m.n + '번 경기</span></div>' +
+      '<div class="body"><div class="ev">' + (m.i === nextId ? '<span class="badge">다음 경기</span>' : '') +
+      '<button type="button" class="lnk" data-event="' + m.e + '" data-g="' + esc(m.k ? '본선' : (m.g || '')) + '">' + esc(EVENTS[m.e]) + '</button>' +
+      (m.k ? '<span class="badge ko">' + esc(m.r) + '</span>' : '<span class="badge">' + esc(groupLabel(m.g)) + '</span>') + '</div>' +
+      sideHtml(m, 'a') + sideHtml(m, 'b') + '</div></article>';
+  });
+  if (day !== null) h += '</div>';
+  if (list.length > shown.length) h += '<button type="button" class="more" data-act="more">더 보기 (' + (list.length - shown.length) + '경기 남음)</button>';
+  if (!list.length) h = '<div class="empty">조건에 맞는 경기가 없습니다.' + (state.d ? '<br>날짜를 ‘전체’로 바꿔 보세요.' : '') + '</div>';
+  $('res').innerHTML = h;
+  var filtered = state.p || state.s !== null || state.r !== null || state.e !== null;
+  $('cnt').textContent = (filtered ? '' : '시간순 전체 일정 · ') + list.length + '경기' + ((state.p || state.s !== null || state.r !== null) && !state.d ? ' (예선 기준 · 본선은 조 순위에 따라 결정)' : '');
+}
+function renderFavs(){
+  var f = favs().filter(function(id){ return id.charAt(0) === 'p' ? PEOPLE[id.slice(2)] : TEAM_BY_NAME[id.slice(2)]; });
+  $('favs').innerHTML = f.length ? '<span class="lb">★ 내 즐겨찾기</span>' + f.map(function(id){
+    if (id.charAt(0) === 'p') { var p = PEOPLE[id.slice(2)]; return chip(p.name, state.p === p.key, 'data-person="' + esc(p.key) + '"', TEAMS[p.team].n); }
+    var t = TEAM_BY_NAME[id.slice(2)]; return chip(t.n, state.s === t.i, 'data-team="' + t.i + '"');
+  }).join('') : '';
+}
+function render(){
+  renderPanel(); renderBar(); renderFavs();
+  var list = selectMatches();
+  renderSummary(list); renderList(list);
+}
+
+/* ---------- 검색 ---------- */
+function norm(s){ return s.replace(/\s+/g, '').toLowerCase(); }
+function renderSug(){
+  var q = norm($('q').value), box = $('sug');
+  $('searchBox').classList.toggle('has', !!$('q').value);
+  if (!q) { box.innerHTML = ''; return; }
+  var h = [], max = 30;
+  function rank(name){ var i = norm(name).indexOf(q); return i < 0 ? -1 : (i === 0 ? 0 : 1); }
+  var ppl = PEOPLE_LIST.map(function(p){ return [rank(p.name), p]; }).filter(function(x){ return x[0] >= 0; }).sort(function(a, b){ return a[0] - b[0]; });
+  var tms = TEAMS.map(function(t){ return [rank(t.n), t]; }).filter(function(x){ return x[0] >= 0; }).sort(function(a, b){ return a[0] - b[0]; });
+  var regs = REGIONS.filter(function(r){ return rank(r.name) === 0; });
+  var evs = EVENTS.map(function(n, e){ return [rank(n), e]; }).filter(function(x){ return x[0] >= 0; });
+  regs.forEach(function(r){ h.push('<button type="button" data-region="' + esc(r.name) + '" data-keep="1"><span class="tg">지역</span><b>' + esc(r.name) + '</b><span class="d">소속 ' + r.teams.length + '곳</span></button>'); });
+  ppl.slice(0, 20).forEach(function(x){ var p = x[1]; h.push('<button type="button" data-person="' + esc(p.key) + '"><span class="tg">교사</span><b>' + esc(p.name) + '</b><span class="d">' + esc(TEAMS[p.team].n) + ' · ' + esc(p.entries.map(function(i){ return EVENTS[ENTRIES[i].e]; }).join(', ')) + '</span></button>'); });
+  tms.slice(0, 12).forEach(function(x){ var t = x[1]; h.push('<button type="button" data-team="' + t.i + '"><span class="tg">소속</span><b>' + esc(t.n) + '</b><span class="d">' + esc(t.r || '지역 확인 필요') + ' · ' + t.entries.length + '팀</span></button>'); });
+  evs.slice(0, 8).forEach(function(x){ h.push('<button type="button" data-event="' + x[1] + '" data-g=""><span class="tg">종목</span><b>' + esc(EVENTS[x[1]]) + '</b><span class="d">' + EVENT_GROUPS[x[1]].entries.length + '팀</span></button>'); });
+  var extra = Math.max(0, ppl.length - 20) + Math.max(0, tms.length - 12);
+  box.innerHTML = h.length ? h.slice(0, max).join('') + (extra ? '<div class="none">외 ' + extra + '건 — 검색어를 더 입력해 보세요.</div>' : '') : '<div class="none">‘' + esc($('q').value) + '’ 검색 결과가 없습니다.</div>';
+}
+function clearSearch(){ $('q').value = ''; renderSug(); }
+
+/* ---------- 이벤트 ---------- */
+document.addEventListener('click', function(ev){
+  var b = ev.target.closest('button'); if (!b) return;
+  var d = b.dataset, inSug = !!b.closest('#sug');
+  if (d.tab) { update({ tab: d.tab }); return; }
+  if (d.cho) { update({ cho: state.cho === d.cho ? null : d.cho }); return; }
+  if (d.day !== undefined) { update({ d: d.day }); return; }
+  if (d.clear) {
+    if (d.clear === 'p') update({ p: null });
+    else if (d.clear === 'r') update({ r: null, s: null });
+    else if (d.clear === 's') update({ s: null });
+    else update({ e: null, g: null });
+    return;
+  }
+  if (d.act === 'more') { limit += STEP; renderList(selectMatches()); return; }
+  if (d.act === 'fav') { toggleFav(); return; }
+  if (d.act === 'share') {
+    var url = location.href;
+    if (navigator.share && /Mobi|Android/i.test(navigator.userAgent)) { navigator.share({ title: document.title, url: url }).catch(function(){}); }
+    else if (navigator.clipboard) { navigator.clipboard.writeText(url).then(function(){ toast('링크를 복사했습니다'); }, function(){ toast('복사하지 못했습니다'); }); }
+    else toast('주소창의 주소를 복사해 주세요');
+    return;
+  }
+  if (d.region) { if (inSug) { clearSearch(); update({ tab: 'r', r: d.region, s: null, p: null, e: null, g: null }); } else pick.region(d.region); return; }
+  if (d.person) { if (inSug) clearSearch(); pick.person(d.person); return; }
+  if (d.team !== undefined) {
+    if (inSug) { clearSearch(); update({ tab: 'r', r: TEAMS[+d.team].region, s: +d.team, p: null, e: null, g: null }, { scroll: true }); }
+    else if (b.classList.contains('chip') && b.closest('#panel')) pick.team(+d.team);
+    else update({ tab: 'r', r: TEAMS[+d.team].region, s: +d.team, p: null, e: null, g: null }, { scroll: true });
+    return;
+  }
+  if (d.event !== undefined) {
+    var e = +d.event;
+    if (inSug) { clearSearch(); update({ tab: 'e', e: e, g: null, p: null, r: null, s: null }, { scroll: true }); }
+    else if (b.closest('#panel')) pick.event(e);
+    else if (b.closest('#sum') && b.classList.contains('chip')) update({ e: e, g: d.g || null });
+    else update({ tab: 'e', e: e, g: d.g || null, p: null, r: null, s: null }, { scroll: true });
+    return;
+  }
+});
+$('q').addEventListener('input', renderSug);
+$('q').addEventListener('keydown', function(ev){
+  if (ev.key === 'Enter') { var first = $('sug').querySelector('button'); if (first) { first.click(); $('q').blur(); } }
+  if (ev.key === 'Escape') clearSearch();
+});
+$('qClear').addEventListener('click', function(){ clearSearch(); $('q').focus(); });
+window.addEventListener('popstate', function(){ readHash(); limit = STEP; render(); });
+window.addEventListener('hashchange', function(){ readHash(); limit = STEP; render(); });
+
+/* ---------- 머리말 ---------- */
+(function(){
+  var kst = new Date(Date.now() + 9 * 3600000), today = Date.UTC(kst.getUTCFullYear(), kst.getUTCMonth(), kst.getUTCDate());
+  var d1 = Date.UTC(YEAR, 10, 21), d2 = Date.UTC(YEAR, 10, 22), n = Math.round((d1 - today) / 86400000);
+  $('dday').textContent = today < d1 ? 'D-' + n : today === d1 ? '오늘 · 1일차 예선' : today === d2 ? '오늘 · 2일차 본선' : '대회 종료';
+  $('note').textContent = (D.notes || []).join(' ');
+})();
+readHash();
+render();
+setInterval(function(){ if (!document.hidden) renderList(selectMatches()); }, 60000);
+})();
+</script>
+</body>
+</html>
