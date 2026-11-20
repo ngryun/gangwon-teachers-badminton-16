@@ -18,6 +18,7 @@
 
 - `index.html` — 화면 전체(스크립트·스타일 포함). 외부 라이브러리 없음.
 - `data.js` — 경기 자료. `build_data.py`가 만듭니다.
+- `bi.png`, `favicon.png` — 상단 ‘모두가 빛나는 강원교육’ BI와 파비콘.
 - `build_data.py` — 한글 파일(.hwpx)에서 경기를 읽어 `data.js`를 만듭니다. 표준 라이브러리만 씁니다.
 - `regions.json` — 소속 → 지역. 원자료에는 지역이 없어 따로 붙인 표입니다.
 
