@@ -119,6 +119,13 @@ details.grp summary{cursor:pointer;color:var(--accent);font-weight:600;padding:4
 .grp dd{margin:2px 0 0;display:flex;flex-wrap:wrap;gap:4px 12px}
 
 .cnt{color:var(--sub);font-size:13px;margin:14px 2px 0}
+.fc{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--ko-soft);border:1px solid color-mix(in srgb,var(--sun) 45%,transparent);border-radius:12px;padding:10px 12px;margin-top:12px;font-size:13px;color:var(--ink)}
+.fc p{margin:0;flex:1 1 220px}
+.fc b{color:var(--ko)}
+.fc a,.fclink{display:inline-flex;align-items:center;gap:4px;font-weight:700;color:var(--accent);text-decoration:none;white-space:nowrap}
+.fc a{background:var(--card);border:1px solid var(--edge);border-radius:999px;padding:7px 12px;min-height:36px}
+.fc a:after,.fclink:after{content:'↗';font-size:11px;opacity:.8}
+.path+.fclink,.fclink{margin-top:8px;font-size:13px}
 .day{font-size:15px;font-weight:800;margin:20px 2px 8px;display:flex;gap:8px;align-items:center}
 .day:before{content:'';width:8px;height:8px;border-radius:50%;background:var(--sun);flex:none}
 .day small{color:var(--sub);font-weight:400}
@@ -202,7 +209,7 @@ footer p{margin:4px 0}
   <div id="res"></div>
 
   <footer>
-    <p id="note"></p>
+    <p><span id="note"></span> <a class="fclink" href="https://www.facecock.co.kr/page/?pid=game_court&ga_id=4395&gg_id=7043" target="_blank" rel="noopener">페이스콕 코트별 진행 현황</a></p>
     <p>대회 운영본부가 배포한 「경기 대진표 및 경기 시간」 자료를 옮긴 것입니다. 현장 사정으로 시간·코트가 바뀔 수 있으니 본부 안내를 함께 확인하세요.</p>
     <p>지역은 대회 참가현황의 교육지원청 단위입니다. 대진표에는 지역이 없어 따로 붙였고, 참가현황의 지역별 팀 수와 대조해 맞췄습니다.</p>
   </footer>
@@ -217,6 +224,10 @@ var D = window.DATA, YEAR = 2026;
 var TEAMS = D.teams, EVENTS = D.events, MATCHES = D.matches;
 var REGION_ORDER = ['춘천','원주','강릉','속초양양','동해','태백','삼척','홍천','횡성','영월','평창','정선','철원','화천','양구','인제','고성','도교육청'];
 var UNKNOWN = '확인 필요';
+var FACECOCK = 'https://www.facecock.co.kr/page/?pid=game_court&ga_id=4395&gg_id=7043';
+function fcNotice(text){
+  return '<div class="fc"><p>' + text + '</p><a href="' + FACECOCK + '" target="_blank" rel="noopener">페이스콕에서 확인</a></div>';
+}
 var DOW = ['일','월','화','수','목','금','토'];
 var $ = function(id){ return document.getElementById(id); };
 function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
@@ -440,6 +451,7 @@ function pathBlock(en){
       return '<li><b>' + esc(m.r) + '</b><em>' + shortDay(m.d) + ' ' + m.t + ' · ' + m.c + '코트</em><span>상대 ' + esc(seedLabel(opp)) + '</span></li>';
     }).join('') + '</ol></div>';
   });
+  if (h) h += '<a class="fclink" href="' + FACECOCK + '" target="_blank" rel="noopener">실제 본선 대진·결과는 페이스콕에서 확인</a>';
   return h;
 }
 function mates(en){
@@ -529,7 +541,14 @@ function renderList(list){
   });
   if (day !== null) h += '</div>';
   if (list.length > shown.length) h += '<button type="button" class="more" data-act="more">더 보기 (' + (list.length - shown.length) + '경기 남음)</button>';
-  if (!list.length) h = '<div class="empty">조건에 맞는 경기가 없습니다.' + (state.d ? '<br>날짜를 ‘전체’로 바꿔 보세요.' : '') + '</div>';
+  var teamView = state.p || state.s !== null || state.r !== null;
+  if (!list.length) {
+    h = (state.d === '11-22' && teamView)
+      ? '<div class="empty">22일 본선은 예선 결과에 따라 대진이 정해져, 여기서는 팀별로 보여 드릴 수 없습니다.<br>본선 시간·코트 틀은 종목별 → ‘본선’에서 볼 수 있습니다.</div>'
+      : '<div class="empty">조건에 맞는 경기가 없습니다.' + (state.d ? '<br>날짜를 ‘전체’로 바꿔 보세요.' : '') + '</div>';
+  }
+  if (state.d === '11-22' || list.some(function(m){ return m.k; }))
+    h = fcNotice('<b>본선</b>은 예선 결과에 따라 올라가는 팀이 정해집니다. 여기에는 시간·코트와 ‘A조 1위’ 같은 자리만 나오고, <b>실제 대진과 결과</b>는 페이스콕에서 확인하세요.') + h;
   $('res').innerHTML = h;
   var filtered = state.p || state.s !== null || state.r !== null || state.e !== null || state.c !== null;
   $('cnt').textContent = (filtered ? '' : '시간순 전체 일정 · ') + list.length + '경기' + ((state.p || state.s !== null || state.r !== null) && !state.d ? ' (예선 기준 · 본선은 조 순위에 따라 결정)' : '');
