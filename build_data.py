@@ -6,6 +6,8 @@
 - 종목 제목은 "[남복 40대 E]" 꼴의 문단, 그 아래 표가 조별 예선·본선 대진이다.
 - 소속(학교·기관) → 지역은 regions.json 에서 읽는다. 문서에는 지역이 없으므로
   새 소속이 생기면 regions.json 에 추가한다.
+- 이름이 같은 다른 학교가 함께 나온 경우(regions.json 의 split)는 선수 조합으로
+  갈라 "신동초(삼척)" 처럼 지역을 붙인 이름으로 바꾼다.
 """
 import json, re, sys, zipfile, collections
 import xml.etree.ElementTree as ET
@@ -130,7 +132,17 @@ def main():
     resolve_brackets(events, matches)
 
     reg = json.loads((HERE / 'regions.json').read_text(encoding='utf-8'))
-    regions, unknown = reg['regions'], reg.get('unknown', {})
+    regions, unknown = dict(reg['regions']), reg.get('unknown', {})
+    for name, by_region in reg.get('split', {}).items():   # 동명 학교: 선수 조합으로 가른다
+        pair_region = {frozenset(pair): r for r, pairs in by_region.items() for pair in pairs}
+        for m in matches:
+            for s in 'ab':
+                if not m['k'] and m[s] == name:
+                    r = pair_region.get(frozenset(m[s + 'p']))
+                    if r is None:
+                        raise SystemExit(f'regions.json split 에 {name} {m[s + "p"]} 조의 지역이 없습니다.')
+                    m[s] = f'{name}({r})'
+                    regions[m[s]] = r
     names = sorted({m[s] for m in matches if not m['k'] for s in 'ab'})
     missing = [n for n in names if n not in regions and n not in unknown]
     if missing:

@@ -181,7 +181,7 @@ footer p{margin:4px 0}
   <footer>
     <p id="note"></p>
     <p>대회 운영본부가 배포한 「경기 대진표 및 경기 시간」 자료를 옮긴 것입니다. 현장 사정으로 시간·코트가 바뀔 수 있으니 본부 안내를 함께 확인하세요.</p>
-    <p>지역은 소속 학교·기관의 소재 시·군 기준이며, 원자료에 없는 정보라 따로 붙였습니다.</p>
+    <p>지역은 대회 참가현황의 교육지원청 단위입니다. 대진표에는 지역이 없어 따로 붙였고, 참가현황의 지역별 팀 수와 대조해 맞췄습니다.</p>
   </footer>
 </div>
 <div class="toast" id="toast" role="status"></div>
@@ -192,7 +192,7 @@ footer p{margin:4px 0}
 'use strict';
 var D = window.DATA, YEAR = 2026;
 var TEAMS = D.teams, EVENTS = D.events, MATCHES = D.matches;
-var REGION_ORDER = ['춘천','원주','강릉','동해','태백','속초','삼척','홍천','횡성','영월','평창','정선','철원','화천','양구','인제','고성','양양'];
+var REGION_ORDER = ['춘천','원주','강릉','속초양양','동해','태백','삼척','홍천','횡성','영월','평창','정선','철원','화천','양구','인제','고성','도교육청'];
 var UNKNOWN = '확인 필요';
 var DOW = ['일','월','화','수','목','금','토'];
 var $ = function(id){ return document.getElementById(id); };
@@ -350,7 +350,7 @@ function renderPanel(){
   ['r','p','e'].forEach(function(t){ $('tab-' + t).setAttribute('aria-selected', state.tab === t ? 'true' : 'false'); });
   var h = '';
   if (state.tab === 'r') {
-    h += '<h2>시·군</h2><div class="grid">' + REGIONS.map(function(r){
+    h += '<h2>지역</h2><div class="grid">' + REGIONS.map(function(r){
       return chip(r.name, state.r === r.name, 'data-region="' + esc(r.name) + '"', r.teams.length + '곳', r.name === UNKNOWN ? 'q' : '');
     }).join('') + '</div>';
     if (state.r !== null) {
@@ -359,7 +359,7 @@ function renderPanel(){
         return chip(t.n, state.s === t.i, 'data-team="' + t.i + '"', t.entries.length + '팀');
       }).join('') + '</div>';
       if (state.r === UNKNOWN) h += '<p class="hint" style="margin-top:8px">강원도 안에 같은 이름의 학교가 여럿이거나 소재지를 확인하지 못한 소속입니다.</p>';
-    } else h += '<p class="hint" style="margin-top:10px">시·군을 고르면 그 지역 소속 팀의 경기를 시간순으로 보여 줍니다.</p>';
+    } else h += '<p class="hint" style="margin-top:10px">지역을 고르면 그 지역 소속 팀의 경기를 시간순으로 보여 줍니다.</p>';
   } else if (state.tab === 'p') {
     h += '<h2>이름 첫 글자</h2><div class="cho">' + CHO.map(function(c){ return chip(c, state.cho === c, 'data-cho="' + c + '"'); }).join('') + '</div>';
     if (state.cho) {
