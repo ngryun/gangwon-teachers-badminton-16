@@ -86,6 +86,7 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .tag{display:inline-flex;align-items:center;gap:4px;background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:5px 6px 5px 12px;font-size:13px;font-weight:700;min-height:32px}
 .tag i{font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.22);font-size:12px}
 .bar .all{color:var(--sub);font-size:13px;font-weight:600;padding:5px 0}
+.reset{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:13px;font-weight:600;color:var(--sub);min-height:32px;white-space:nowrap}
 .seg{display:flex;background:var(--chip);border-radius:9px;padding:3px;flex:none}
 .seg button{border:0;background:none;border-radius:7px;padding:5px 10px;font-size:13px;font-weight:600;color:var(--sub);min-height:32px}
 .seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
@@ -389,12 +390,12 @@ function renderPanel(){
   ['r','p','e','c'].forEach(function(t){ $('tab-' + t).setAttribute('aria-selected', state.tab === t ? 'true' : 'false'); });
   var h = '';
   if (state.tab === 'r') {
-    h += '<h2>지역</h2><div class="grid">' + REGIONS.map(function(r){
+    h += '<h2>지역</h2><div class="grid">' + chip('전체', state.r === null, 'data-clear="r"', TEAMS.length + '곳') + REGIONS.map(function(r){
       return chip(r.name, state.r === r.name, 'data-region="' + esc(r.name) + '"', r.teams.length + '곳', r.name === UNKNOWN ? 'q' : '');
     }).join('') + '</div>';
     if (state.r !== null) {
       var reg = REGIONS.filter(function(r){ return r.name === state.r; })[0];
-      h += '<h2>' + esc(state.r) + ' 소속 ' + reg.teams.length + '곳 — 누르면 그 소속만 봅니다</h2><div class="chips">' + reg.teams.map(function(t){
+      h += '<h2>' + esc(state.r) + ' 소속 ' + reg.teams.length + '곳 — 누르면 그 소속만 봅니다</h2><div class="chips">' + chip(state.r + ' 전체', state.s === null, 'data-clear="s"', reg.teams.reduce(function(n, t){ return n + t.entries.length; }, 0) + '팀') + reg.teams.map(function(t){
         return chip(t.n, state.s === t.i, 'data-team="' + t.i + '"', t.entries.length + '팀');
       }).join('') + '</div>';
       if (state.r === UNKNOWN) h += '<p class="hint" style="margin-top:8px">강원도 안에 같은 이름의 학교가 여럿이거나 소재지를 확인하지 못한 소속입니다.</p>';
@@ -409,13 +410,14 @@ function renderPanel(){
     } else h += '<p class="hint" style="margin-top:10px">첫 글자를 고르거나, 위 검색창에 이름을 입력하세요. (출전 ' + PEOPLE_LIST.length + '명)</p>';
   } else if (state.tab === 'c') {
     var per = {}; MATCHES.forEach(function(m){ if (!state.d || m.d === state.d) per[m.c] = (per[m.c] || 0) + 1; });
-    h += '<h2>코트 — 누르면 그 코트의 경기를 시간순으로 봅니다</h2><div class="courts">' + COURTS.map(function(c){
+    h += '<h2>코트 — 누르면 그 코트의 경기를 시간순으로 봅니다</h2><div class="courts">' + chip('전체', state.c === null, 'data-clear="c"', COURTS.reduce(function(n, c){ return n + (per[c] || 0); }, 0) + '경기') + COURTS.map(function(c){
       return chip(c + '코트', state.c === c, 'data-court="' + c + '"', (per[c] || 0) + '경기');
     }).join('') + '</div>';
     if (state.c !== null && (state.r !== null || state.e !== null)) h += '<p class="hint" style="margin-top:10px">지금 고른 지역·종목 조건과 함께 적용됩니다.</p>';
   } else {
     var rows = [], seen = {};
     EVENTS.forEach(function(name, e){ var p = eventParts(name); if (!seen[p.row]) { seen[p.row] = { row: p.row, items: [] }; rows.push(seen[p.row]); } seen[p.row].items.push({ e: e, cls: p.cls }); });
+    h += '<div class="evrow"><span>전체</span><div class="chips">' + chip('전체 종목', state.e === null, 'data-clear="e"', EVENTS.length + '개') + '</div></div>';
     h += rows.map(function(r){
       return '<div class="evrow"><span>' + esc(r.row) + '</span><div class="chips">' + r.items.map(function(it){ return chip(it.cls, state.e === it.e, 'data-event="' + it.e + '"'); }).join('') + '</div></div>';
     }).join('');
@@ -432,6 +434,7 @@ function renderBar(){
   if (state.s !== null) tag(TEAMS[state.s].n, 's');
   if (state.e !== null) tag(EVENTS[state.e] + (state.g ? ' · ' + (state.g === '본선' ? '본선' : state.g + '조') : ''), 'e');
   if (state.c !== null) tag(state.c + '코트', 'c');
+  if (t.length) t.push('<button type="button" class="reset" data-act="reset" aria-label="조건을 모두 지우고 전체 경기 보기">↺ 초기화</button>');
   $('act').innerHTML = t.length ? t.join('') : '<span class="all">전체 경기</span>';
   Array.prototype.forEach.call(document.querySelectorAll('.seg button'), function(b){ b.setAttribute('aria-pressed', b.dataset.day === state.d ? 'true' : 'false'); });
 }
@@ -607,6 +610,7 @@ document.addEventListener('click', function(ev){
     else update({ tab: 'c', c: +d.court, p: null, r: null, s: null, e: null, g: null }, { scroll: true });
     return;
   }
+  if (d.act === 'reset') { update({ r: null, s: null, p: null, e: null, g: null, c: null }); return; }
   if (d.act === 'more') { limit += STEP; renderList(selectMatches()); return; }
   if (d.act === 'fav') { toggleFav(); return; }
   if (d.act === 'share') {
