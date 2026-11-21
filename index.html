@@ -159,6 +159,25 @@ details.grp summary{cursor:pointer;color:var(--accent);font-weight:600;padding:4
 .side .sc{min-width:24px;text-align:right;font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--sub);align-self:center}
 .side .sc.win{color:var(--accent)}
 .side.seed .sc{margin-left:auto}
+.view{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--chip);border-radius:11px;padding:4px;margin-top:12px}
+.view button{border:0;background:none;border-radius:8px;padding:9px 4px;font-weight:700;color:var(--sub);min-height:42px}
+.view button[aria-pressed="true"]{background:var(--card);color:var(--accent);box-shadow:var(--shadow)}
+.pod{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:14px;padding:10px 12px;display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:center;box-shadow:var(--shadow)}
+.pod .medal{font-size:15px;font-weight:800;line-height:1.2}
+.pod .medal small{display:block;font-size:11px;font-weight:600;color:var(--sub)}
+.pod.g1{border-left-color:#d4a017}.pod.g1 .medal{color:#a97c06}
+.pod.g2{border-left-color:#8f9db0}.pod.g2 .medal{color:#66758a}
+.pod.g3{border-left-color:#b9773e}.pod.g3 .medal{color:#9a5c26}
+.pod.live{border-left-color:var(--accent)}.pod.live .medal{color:var(--accent);font-size:14px}
+@media (prefers-color-scheme: dark){.pod.g1 .medal{color:#e8bd4a}.pod.g2 .medal{color:#b3c0d0}.pod.g3 .medal{color:#d79a63}}
+.pod .who{font-size:15px;margin-top:2px}
+.pod .nx{font-size:12px;color:var(--sub);margin-top:3px}
+.rest{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 12px}
+.rest summary{cursor:pointer;font-weight:700;color:var(--accent);padding:10px 0}
+.rest ul{list-style:none;margin:0;padding:0 0 8px;font-size:13px}
+.rest li{display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline;padding:6px 0;border-top:1px dashed var(--line)}
+.rest li i{font-style:normal;margin-left:auto;font-weight:700;color:var(--sub);white-space:nowrap}
+.podline{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:8px;font-size:13px}
 .stline{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px;font-size:13px}
 .rk{display:inline-block;min-width:30px;font-size:11px;font-weight:800;color:var(--accent);background:var(--accent-soft);border-radius:5px;padding:1px 5px;text-align:center}
 .rk.adv{color:var(--ko);background:var(--ko-soft)}
@@ -327,11 +346,11 @@ function seedLabel(seeds){
 }
 
 /* ---------- 상태 ↔ 주소(#) ---------- */
-var state = { tab: 'r', r: null, s: null, p: null, e: null, g: null, c: null, d: '', cho: null };
+var state = { tab: 'r', r: null, s: null, p: null, e: null, g: null, c: null, d: '', v: null, cho: null };
 var limit = 60, STEP = 60;
 function readHash(){
   var q = new URLSearchParams(location.hash.replace(/^#/, ''));
-  var s = { tab: state.tab, r: null, s: null, p: null, e: null, g: null, c: null, d: '', cho: state.cho };
+  var s = { tab: state.tab, r: null, s: null, p: null, e: null, g: null, c: null, d: '', v: null, cho: state.cho };
   if (q.get('p') && PEOPLE[q.get('p')]) s.p = q.get('p');
   if (q.get('s') && TEAM_BY_NAME[q.get('s')]) s.s = TEAM_BY_NAME[q.get('s')].i;
   if (q.get('r') && REGIONS.some(function(r){ return r.name === q.get('r'); })) s.r = q.get('r');
@@ -339,6 +358,7 @@ function readHash(){
   if (e >= 0) { s.e = e; var g = q.get('g'); if (g && (g === '본선' ? EVENT_GROUPS[e].ko : EVENT_GROUPS[e].groups.indexOf(g) >= 0)) s.g = g; }
   if (q.get('d') === '21' || q.get('d') === '22') s.d = '11-' + q.get('d');
   if (COURTS.indexOf(+q.get('c')) >= 0) s.c = +q.get('c');
+  if (q.get('v') === 'res') s.v = 'res';
   if (['r','p','e','c'].indexOf(q.get('tab')) >= 0) s.tab = q.get('tab');
   else if (s.p) s.tab = 'p'; else if (s.c !== null && s.e === null && s.r === null && s.s === null) s.tab = 'c'; else if (s.e !== null && s.r === null && s.s === null) s.tab = 'e'; else if (s.r !== null || s.s !== null) s.tab = 'r';
   state = s;
@@ -351,6 +371,7 @@ function writeHash(){
   if (state.e !== null) q.set('e', EVENTS[state.e]);
   if (state.g) q.set('g', state.g);
   if (state.c !== null) q.set('c', state.c);
+  if (state.v) q.set('v', state.v);
   if (state.d) q.set('d', state.d.slice(3));
   var h = q.toString();
   var url = location.pathname + location.search + (h ? '#' + h : '');
@@ -506,11 +527,59 @@ function pathBlock(en){
   if (h) h += '<a class="fclink" href="' + FACECOCK + '" target="_blank" rel="noopener">' + (R ? '이후 본선 결과·대진은 페이스콕에서 확인' : '실제 본선 대진·결과는 페이스콕에서 확인') + '</a>';
   return h;
 }
+function placing(en){   // 한 팀의 지금까지 성적. rank 1~3 이면 입상
+  var hasKo = EVENT_GROUPS[en.e].ko && en.g, medal = ['', '우승', '준우승', '3위'];
+  if (!hasKo) {
+    if (!en.st) return { state: 'none', label: '결과 없음' };
+    if (!groupDone(en)) return { state: 'live', label: '리그 진행 중' };
+    return { state: 'final', rank: en.st.r, label: medal[en.st.r] || en.st.r + '위' };
+  }
+  if (!en.ko.length) {
+    if (en.st && groupDone(en)) return { state: 'final', rank: 90 + en.st.r, label: '예선 ' + en.st.r + '위' };
+    return { state: en.st ? 'live' : 'none', label: en.st ? '예선 진행 중' : '결과 없음' };
+  }
+  var ms = en.ko.slice().sort(function(a, b){ return a.ms - b.ms; }), last = ms[ms.length - 1];
+  if (!last.sc) return { state: 'live', label: last.r + ' 진출', next: last };
+  var i = last.ea === en.i ? 0 : 1, won = last.sc[i] > last.sc[1 - i];
+  if (last.r === '결승') return { state: 'final', rank: won ? 1 : 2, label: won ? '우승' : '준우승' };
+  if (!won) return last.r === '4강' ? { state: 'final', rank: 3, label: '3위' } : { state: 'final', rank: 50, label: last.r };
+  return { state: 'live', label: last.r + ' 승리', wait: true };
+}
+function podiumOf(e){
+  return EVENT_GROUPS[e].entries.map(function(en){ return { en: en, pl: placing(en) }; })
+    .filter(function(x){ return x.pl.state === 'final' && x.pl.rank <= 3; }).sort(function(a, b){ return a.pl.rank - b.pl.rank; });
+}
+function renderResults(){
+  var ens = [];
+  TEAMS.forEach(function(t){ if (t.region === state.r) t.entries.forEach(function(x){ if (state.e === null || ENTRIES[x].e === state.e) ens.push(ENTRIES[x]); }); });
+  var rows = ens.map(function(en){ return { en: en, pl: placing(en) }; });
+  var medals = rows.filter(function(x){ return x.pl.state === 'final' && x.pl.rank <= 3; }).sort(function(a, b){ return a.pl.rank - b.pl.rank || a.en.e - b.en.e; });
+  var live = rows.filter(function(x){ return x.pl.state === 'live'; }).sort(function(a, b){ return (a.pl.next ? a.pl.next.ms : 0) - (b.pl.next ? b.pl.next.ms : 0) || a.en.e - b.en.e; });
+  var rest = rows.filter(function(x){ return medals.indexOf(x) < 0 && live.indexOf(x) < 0; }).sort(function(a, b){ return a.en.e - b.en.e || (a.pl.rank || 999) - (b.pl.rank || 999); });
+  function evLink(en){ return '<button type="button" class="lnk" data-event="' + en.e + '" data-g="' + esc(en.g) + '">' + esc(EVENTS[en.e]) + '</button>'; }
+  function card(x){
+    var pl = x.pl, en = x.en, cls = pl.state === 'live' ? 'live' : 'g' + pl.rank, nx = '';
+    if (pl.next) { var os = pl.next.ea === en.i ? 'b' : 'a'; nx = '<div class="nx">다음 ' + shortDay(pl.next.d) + ' ' + pl.next.t + ' · ' + pl.next.c + '코트 · 상대 ' + oppHtml(pl.next, os) + '</div>'; }
+    else if (pl.wait) nx = '<div class="nx">다음 경기는 페이스콕에서 확인</div>';
+    return '<article class="pod ' + cls + '"><div class="medal">' + esc(pl.label) + (en.st && en.g ? '<small>예선 ' + en.st.r + '위</small>' : '') + '</div><div><div class="ev">' + evLink(en) + '</div><div class="who">' + pairHtml(en) + '</div>' + nx + '</div></article>';
+  }
+  var h = fcNotice('페이스콕 <b>' + esc(R_AT) + '</b> 기준 경기 결과로 정리했습니다. 본선이 있는 종목의 3위는 4강에서 진 두 팀입니다. 공식 시상은 대회 본부 발표를 따릅니다.');
+  h += '<h3 class="day">입상 <small>' + medals.length + '팀</small></h3>' + (medals.length ? '<div class="list">' + medals.map(card).join('') + '</div>' : '<div class="empty">아직 입상이 확정된 팀이 없습니다.</div>');
+  if (live.length) h += '<h3 class="day">진행 중 <small>' + live.length + '팀</small></h3><div class="list">' + live.map(card).join('') + '</div>';
+  if (rest.length) h += '<details class="rest"><summary>그 밖의 팀 성적 (' + rest.length + '팀)</summary><ul>' + rest.map(function(x){
+    return '<li>' + evLink(x.en) + '<span>' + pairHtml(x.en) + '</span><i>' + esc(x.pl.label) + '</i></li>';
+  }).join('') + '</ul></details>';
+  $('res').innerHTML = h;
+  $('cnt').textContent = state.r + ' 출전 ' + rows.length + '팀 · 입상 ' + medals.length + '팀' + (live.length ? ' · 진행 중 ' + live.length + '팀' : '');
+}
+function resultsView(){ return !!R && state.v === 'res' && state.r !== null && state.s === null && !state.p; }
+function renderMain(){ if (resultsView()) renderResults(); else renderList(selectMatches()); }
 function standingHtml(en){
   if (!en.st) return '';
   var st = en.st, done = groupDone(en), hasKo = EVENT_GROUPS[en.e].ko && en.g;
-  var tail = '';
-  if (en.ko.length) tail = '<span class="rk adv">본선 진출</span>';
+  var tail = '', pl = placing(en);
+  if (pl.state === 'final' && pl.rank <= 3) tail = '<span class="rk adv">' + esc(pl.label) + '</span>';
+  else if (en.ko.length) tail = '<span class="rk adv">' + (pl.state === 'live' ? esc(pl.label) : '본선 ' + esc(pl.label)) + '</span>';
   else if (done && hasKo && st.r > 2) tail = '<span>예선에서 마감</span>';
   return '<div class="stline"><span class="rk">' + (en.g ? '예선 ' : '') + st.r + '위</span><span><b>' + st.w + '승 ' + st.l + '패</b> · 득실 ' + (st.pf - st.pa > 0 ? '+' : '') + (st.pf - st.pa) + (done ? '' : ' (진행 중)') + '</span>' + tail + '</div>';
 }
@@ -526,7 +595,7 @@ function regionText(t){
   if (t.r) return t.r;
   return t.cand && t.cand.length ? '지역 확인 필요(' + t.cand.join('·') + ' 중)' : '지역 확인 필요';
 }
-function renderSummary(list){
+function renderSummary(){
   var h = '', id = favId(), isFav = id && favs().indexOf(id) >= 0;
   var tools = (id ? '<button type="button" class="ib' + (isFav ? ' on' : '') + '" data-act="fav" aria-pressed="' + (isFav ? 'true' : 'false') + '">' + (isFav ? '★ 저장됨' : '☆ 저장') + '</button>' : '') +
     '<button type="button" class="ib" data-act="share">링크 복사</button>';
@@ -554,6 +623,8 @@ function renderSummary(list){
     MATCHES.forEach(function(m){ if (m.e === state.e) { if (m.k) nko++; else n21++; } });
     h += '<div class="top"><h2>' + esc(EVENTS[state.e]) + '<small>' + eg.entries.length + '팀' + (eg.groups.length ? ' · ' + eg.groups.length + '개 조' : ' · 풀리그') + '</small></h2>' + tools + '</div>';
     h += '<p>예선 <b>' + n21 + '경기</b>' + (nko ? ' · 본선 <b>' + nko + '경기</b>' : ' · 본선 대진 없음') + '</p>';
+    var pod = R ? podiumOf(state.e) : [];
+    if (pod.length) h += '<div class="podline">' + pod.map(function(x){ return '<span><span class="rk adv">' + esc(x.pl.label) + '</span> ' + pairHtml(x.en) + '</span>'; }).join('') + '</div>';
     if (eg.groups.length > 1 || eg.ko) {
       h += '<div class="chips" style="margin-top:10px">' + chip('전체', !state.g, 'data-event="' + state.e + '" data-g=""') +
         eg.groups.map(function(g){ return chip(g + '조', state.g === g, 'data-event="' + state.e + '" data-g="' + g + '"'); }).join('') +
@@ -572,6 +643,7 @@ function renderSummary(list){
     var reg = REGIONS.filter(function(r){ return r.name === state.r; })[0];
     var ne = reg.teams.reduce(function(n, t){ return n + t.entries.length; }, 0);
     h += '<div class="top"><h2>' + esc(state.r) + '<small>소속 ' + reg.teams.length + '곳 · 출전 ' + ne + '팀</small></h2><button type="button" class="ib" data-act="share">링크 복사</button></div>';
+    if (R) h += '<div class="view" role="group" aria-label="보기 전환"><button type="button" data-view="" aria-pressed="' + (state.v !== 'res') + '">경기 일정</button><button type="button" data-view="res" aria-pressed="' + (state.v === 'res') + '">🏅 입상 · 성적</button></div>';
   } else if (state.c !== null) {
     var byDay = {}; MATCHES.forEach(function(m){ if (m.c === state.c) byDay[m.d] = (byDay[m.d] || 0) + 1; });
     h += '<div class="top"><h2>' + state.c + '코트<small>' + Object.keys(byDay).sort().map(function(d){ return shortDay(d) + ' ' + byDay[d] + '경기'; }).join(' · ') + '</small></h2><button type="button" class="ib" data-act="share">링크 복사</button></div>';
@@ -632,8 +704,7 @@ function renderFavs(){
 }
 function render(){
   renderPanel(); renderBar(); renderFavs();
-  var list = selectMatches();
-  renderSummary(list); renderList(list);
+  renderSummary(); renderMain();
 }
 
 /* ---------- 검색 ---------- */
@@ -677,7 +748,8 @@ document.addEventListener('click', function(ev){
     else update({ tab: 'c', c: +d.court, p: null, r: null, s: null, e: null, g: null }, { scroll: true });
     return;
   }
-  if (d.act === 'reset') { update({ r: null, s: null, p: null, e: null, g: null, c: null }); return; }
+  if (d.act === 'reset') { update({ r: null, s: null, p: null, e: null, g: null, c: null, v: null }); return; }
+  if (d.view !== undefined) { update({ v: d.view || null }); return; }
   if (d.act === 'more') { limit += STEP; renderList(selectMatches()); return; }
   if (d.act === 'fav') { toggleFav(); return; }
   if (d.act === 'share') {
@@ -722,7 +794,7 @@ window.addEventListener('hashchange', function(){ readHash(); limit = STEP; rend
 })();
 readHash();
 render();
-setInterval(function(){ if (!document.hidden) renderList(selectMatches()); }, 60000);
+setInterval(function(){ if (!document.hidden) renderMain(); }, 60000);
 })();
 </script>
 </body>
